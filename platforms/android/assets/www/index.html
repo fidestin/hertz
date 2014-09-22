@@ -69,7 +69,7 @@
                 document.addEventListener("deviceready", onDeviceReady, false);
                 function onDeviceReady() {
                     getCordovaLocation();
-                    
+                    navigator.splashscreen.show();
                     
                     document.addEventListener("offline", onOffline, false);
                     document.addEventListener("online", onOnline, false);

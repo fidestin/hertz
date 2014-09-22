@@ -8,13 +8,20 @@
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
     </feature>
-    <name>HelloWorld</name>
+    <splash density="port-hdpi" src="res/screen.png" />
+    <splash density="port-ldpi" src="res/screen.png" />
+    <splash density="port-mdpi" src="res/screen.png" />
+    <splash density="port-xhdpi" src="res/screen.png" />
+    <name>Hertz</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Nice stuff for Hertz
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
+    <preference name="splashscreen" value="screen" />
+    <preference name="SplashScreenDelay" value="5000" />
     <content src="index.html" />
     <access origin="*" />
+    <icon src="res/icon.png" />
 </widget>

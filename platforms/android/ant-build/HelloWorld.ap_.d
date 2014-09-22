@@ -1,7 +1,8 @@
 c:\Brendan\Vouchers\code\hertz\platforms\android\ant-build\HelloWorld.ap_ \
  : c:\Brendan\Vouchers\code\hertz\platforms\android\res\drawable\icon.png \
+c:\Brendan\Vouchers\code\hertz\platforms\android\res\drawable\screen.png \
 c:\Brendan\Vouchers\code\hertz\platforms\android\res\drawable-hdpi\icon.png \
-c:\Brendan\Vouchers\code\hertz\platforms\android\res\drawable-land-hdpi\screen.png \
+c:\Brendan\Vouchers\code\hertz\platforms\android\res\drawable-land-hdpi\splash.png \
 c:\Brendan\Vouchers\code\hertz\platforms\android\res\drawable-land-ldpi\screen.png \
 c:\Brendan\Vouchers\code\hertz\platforms\android\res\drawable-land-mdpi\screen.png \
 c:\Brendan\Vouchers\code\hertz\platforms\android\res\drawable-land-xhdpi\screen.png \
@@ -15,8 +16,9 @@ c:\Brendan\Vouchers\code\hertz\platforms\android\res\drawable-xhdpi\icon.png \
 c:\Brendan\Vouchers\code\hertz\platforms\android\res\values\strings.xml \
 c:\Brendan\Vouchers\code\hertz\platforms\android\res\xml\config.xml \
 c:\Brendan\Vouchers\code\hertz\platforms\android\ant-build\res\drawable\icon.png \
+c:\Brendan\Vouchers\code\hertz\platforms\android\ant-build\res\drawable\screen.png \
 c:\Brendan\Vouchers\code\hertz\platforms\android\ant-build\res\drawable-hdpi\icon.png \
-c:\Brendan\Vouchers\code\hertz\platforms\android\ant-build\res\drawable-land-hdpi\screen.png \
+c:\Brendan\Vouchers\code\hertz\platforms\android\ant-build\res\drawable-land-hdpi\splash.png \
 c:\Brendan\Vouchers\code\hertz\platforms\android\ant-build\res\drawable-land-ldpi\screen.png \
 c:\Brendan\Vouchers\code\hertz\platforms\android\ant-build\res\drawable-land-mdpi\screen.png \
 c:\Brendan\Vouchers\code\hertz\platforms\android\ant-build\res\drawable-land-xhdpi\screen.png \
