@@ -155,7 +155,7 @@ ToolbarDemo.stores.categoryStore=new Ext.data.Store({
          {categoryID:'225',catdescription:'Bars',catImage:'travelicons/Bars.jpg'},
          {categoryID:'214',catdescription:'Hotels',catImage:'travelicons/hotel.jpg'},
          {categoryID:'247',catdescription:'Attractions',catImage:'travelicons/Sights.jpg'},
-		 {categoryID:'999',catdescription:'Search nearby...',catImage:'travelicons/Sights.jpg'}
+		 {categoryID:'999',catdescription:'Search...',catImage:'travelicons/Sights.jpg'}
 	]
 });
 //BMCA - Added categories

@@ -444,7 +444,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
                     {
                     xtype:'component',
                     id:'fidesversion',
-                    html:'2012.07.14.1'   //V.V.V.YYYY.MM.DD//--Added FB+geo+Versioning+storelink
+                    html:'2014.09.23.1'   //V.V.V.YYYY.MM.DD//--Added FB+geo+Versioning+storelink
                     },
 				{
 				    xtype:  'button',

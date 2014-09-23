@@ -92,7 +92,8 @@ function setMarkers(map, markers,infoWindowPopMode) {
                                       category:sites[3],
 									  stuffID:sites[4],
 									  locationImage:sites[5],
-									  address:sites[6]
+									  address:sites[6],
+									  freeText:sites[7]
                                       });
 	addInfoWindow(marker,infoWindowPopMode);
 	googleMapMarkers.push(marker);
@@ -114,16 +115,27 @@ function loadMapDetail(detailStuffID){
 function addInfoWindow(marker,infoWindowPopMode){
  try{
 	 var infowindow;
-	 
+	 //var destailString=marker.description;
 	 if (infoWindowPopMode==true){
 			infowindow=new google.maps.InfoWindow({
-								  content:'<div id="content"><a href="#" onclick="loadMapDetail('+marker.stuffID+');">'+marker.title+'</a></div>'
+						//		  content:'<div id="content"><a href="#" onclick="loadMapDetail('+marker.stuffID+');">'+marker.title+'</a></div>'
+						 content:'<div><div style="float:left;">' +
+                    '<span style="font-size:18px;font-weight:bold;"><a href="#" onclick="loadMapDetail('+marker.stuffID+');">'+marker.title+'</a></span><hr>' +
+                    '<span>' + marker.freeText + '<span>' + 
+                    '</div><div style="float:right; padding:5px;"><img src="GeoData/thumbnails/' + marker.locationImage + '">' +
+                    '</img></div></div>',
+					maxWidth:200
 			 });
 		}
 	 else
 		 {
-		 infowindow=new google.maps.InfoWindow({
-								  content:'<div id="content"><a href="#">'+marker.title+'</a></div>'
+		infowindow=new google.maps.InfoWindow({
+								  content:'<div><div style="float:left;">' +
+                    '<span style="font-size:18px;font-weight:bold;">'+marker.title+'</span><hr>' +
+                    '<span>' + marker.freeText + '<span>' + 
+                    '</div><div style="float:right; padding:5px;"><img src="GeoData/thumbnails/' + marker.locationImage + '">' +
+                    '</img></div></div>',
+					maxWidth:200
 			 });
 		 }
 	 google.maps.event.addListener(marker,'mousedown',function(){
@@ -348,34 +360,9 @@ Ext.regController('StuffsController', {
 				ToolbarDemo.views.stuffView.setActiveItem(
 						ToolbarDemo.views.stuffsListView,{ type: 'slide', direction: 'left' }
 				);
-				//add a second point
-				//set bounds...(change point, or add more and check bounds).
-				//Now load from Sqlite based on Haversine.
+							
 				
-				//var domSt=new google.maps.LatLng(53.2707,-9.056);
-				/*var midomtSt=['Dominic St',53.2707,-9.056,225];
-				var midomStLatLng=new google.maps.LatLng(53.2707,-9.056);
-				bounds.extend(midomStLatLng);
-				
-				mimarkers.push(midomtSt);
-				
-				var miLitir=['Litir',53.4544,-9.439,225];
-				var miLitirLatLng=new google.maps.LatLng(53.4544,-9.439);
-				bounds.extend(miLitirLatLng);
-				
-				mimarkers.push(miLitir);
-				
-				mimarkers.push(['Kilary',53.611,-9.67,225]);
-				bounds.extend(new google.maps.LatLng(53.611,-9.67));
-				
-				//Addd more markers here...then map em
-				setMarkers(mimap,mimarkers,true);
-				
-				//mimap.setCenter(userLocation);
-				//mimap.setZoom=13;
-				
-				
-				
+			/*	
 			//**** Google Map Management	
 			google.maps.event.addDomListener(mimap,'center_changed',function(){
 					console.log('Firing resize');
@@ -387,8 +374,8 @@ Ext.regController('StuffsController', {
 			mimap.setCenter(bounds.getCenter());
 			mimap.setZoom(9);
 			//**** End Map Management
-			
 			*/
+			
 			
 		}
 	},
@@ -447,7 +434,7 @@ Ext.regController('StuffsController', {
 				}
 				if (options.action=="openMapList"){
 					var thisSupplier=suppliers.items[i].data;
-					arSupplier=[thisSupplier.description,thisSupplier.latX,thisSupplier.latY,thisSupplier.categoryID,thisSupplier.stuffID,thisSupplier.locationImage,thisSupplier.address];
+					arSupplier=[thisSupplier.description,thisSupplier.latX,thisSupplier.latY,thisSupplier.categoryID,thisSupplier.stuffID,thisSupplier.locationImage,thisSupplier.address, thisSupplier.stuffName];
 					//markerPositions[i]=new google.maps.LatLng(suppliers[i].data.latX,suppliers[i].data.latY);
 					markerPositions[i]=new google.maps.LatLng(thisSupplier.latX,thisSupplier.latY);
 					mimarkers.push(arSupplier);
@@ -467,7 +454,7 @@ Ext.regController('StuffsController', {
 				console.log('Parsed user position ' + userPosX + ',' + userPosY);
 				var userLocation=new google.maps.LatLng(userPosX,userPosY);
 				  
-                  var miUser=['Your current location',userPosX,userPosY,0];
+                  var miUser=['Your current location',userPosX,userPosY,0,0,0,0,'You are here'];
                   mimarkers.push(miUser);
            
 				
@@ -574,7 +561,7 @@ Ext.regController('StuffsController', {
                   //arSupplier.length=0;
                   for (var i=0;i<suppliers.length;i++){
                     var thisSupplier=suppliers.items[i].data;
-                    arSupplier=[thisSupplier.description,thisSupplier.latX,thisSupplier.latY,thisSupplier.categoryID];
+                    arSupplier=[thisSupplier.description,thisSupplier.latX,thisSupplier.latY,thisSupplier.categoryID, thisSupplier.stuffID,thisSupplier.locationImage,thisSupplier.address,thisSupplier.stuffName];
                     markerPositions[i]=new google.maps.LatLng(thisSupplier.latX,thisSupplier.latY);
                     mimarkers.push(arSupplier);
                   }
@@ -592,7 +579,7 @@ Ext.regController('StuffsController', {
 				console.log('Parsed user position ' + userPosX + ',' + userPosY);
 				var userLocation=new google.maps.LatLng(userPosX,userPosY);
                   
-                  var miUser=['Your current location',userPosX,userPosY,0];
+                  var miUser=['Your current location',userPosX,userPosY,0,0,0,0,'You are here'];
                   mimarkers.push(miUser);
                   setMarkers(mimap,mimarkers,false);
                   infowindow=new google.maps.InfoWindow({

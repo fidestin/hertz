@@ -33,13 +33,28 @@ function launchDirectionsWindow(){
   
   console.log('In MapChildbrowser :' + directionsUrl);
   
+  var popup=window.open("about:blank","myPopUp");
+  var url = 'http://maps.google.com/maps?saddr=London+UK&daddr=Birmingham+UK';
   
+	  //http://stackoverflow.com/questions/11999837/force-window-open-to-create-new-tab-in-chrome
+	  //window.open must be called within a callback which is triggered by a user action (example onclick) for the page to open in a new tab instead of //a window
+	  //$.get("http://www.fidestin.com/images/bg-content.gif",function(result){
+	  //	popup.location=url;
+	  //});
+  
+  
+  /* Open native Android App */
+  
+  //window.open(url,'_blank');
+  var newwindow = window.open(directionsUrl, "_blank", "resizable=yes, scrollbars=yes, titlebar=yes");
+  
+  /*
   //Cordova 3.0 Plugin
   var ref=window.open(directionsUrl,'_blank','location=yes');
   //Needless prompts
 	ref.addEventListener('loadstart',function(event){console.log('start' + event.url);});
 	ref.addEventListener('loadstop',function(event){console.log('stop' + event.url);});
-  
+  */
   
  }
  catch(b){
