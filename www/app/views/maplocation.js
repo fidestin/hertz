@@ -15,8 +15,19 @@
 var Mymap;
 
  function doNewWindow(){
-	var ref = window.open('http://apache.org', '_blank', 'location=yes');
-         ref.addEventListener('loadstart', function(event) { console.log('start: ' + event.url); });
+ 
+	var userX=userPositionLatX().toFixed(3);
+  var userY=userPositionLongY().toFixed(3);
+  
+  var dest=Ext.getCmp('mapcard').supplierLocation;
+  var destX=dest[Object.keys(dest)[0]].toFixed(3);
+  var destY=dest[Object.keys(dest)[1]].toFixed(3);
+  //var directionsUrl='https://maps.google.com/maps?saddr='+userX+','+userY + '&daddr='+destX+','+destY +'&dirflg=w';
+  var directionsUrl='https://maps.google.com/maps?saddr='+userX+','+userY + '&daddr='+destX+','+destY;
+  
+  
+	var ref = window.open(directionsUrl, '_blank', 'location=yes');
+         ref.addEventListener('loadstart', function(event) { console.log('start: ' + event.url + "---" + directionsUrl); });
          ref.addEventListener('loadstop', function(event) { console.log('stop: ' + event.url); });
          ref.addEventListener('loaderror', function(event) { console.log('error: ' + event.message); });
          ref.addEventListener('exit', function(event) { console.log(event.type); });
