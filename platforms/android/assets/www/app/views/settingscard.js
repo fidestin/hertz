@@ -29,7 +29,7 @@ ToolbarDemo.views.createLoginHandler=function(){
 					Ext.getCmp('lastname').enable();
 					Ext.getCmp('password').enable();
 					
-					Ext.getCmp('savebutt').el.dom.textContent='Sign Up';
+					Ext.getCmp('savebutt').el.dom.textContent='Register';
 					
 					Ext.getCmp('email').setValue('');
 					Ext.getCmp('password').setValue('');
@@ -53,7 +53,7 @@ ToolbarDemo.views.loginHandler=function(){
 			{
                 console.log('1');
                 
-				Ext.getCmp('loginButton').el.dom.textContent='Sign In';
+				Ext.getCmp('loginButton').el.dom.textContent='Log In';
 				Ext.getCmp('savebutt').hide();
 				Ext.getCmp('createButton').show();
 				Ext.getCmp('registermessage').show();
@@ -75,7 +75,7 @@ ToolbarDemo.views.loginHandler=function(){
 						Ext.getCmp('email').enable();
 						Ext.getCmp('password').enable();
 						Ext.getCmp('savebutt').hide();
-						Ext.getCmp('loginButton').el.dom.textContent="Sign In";
+						Ext.getCmp('loginButton').el.dom.textContent="Log In";
 						console.log('LogginStatus :' + localStorage.loggedIn);
 						Ext.getCmp('password').setValue('');
 						var mainc=Ext.getCmp('mainview');			//reset the badge also....
@@ -92,7 +92,7 @@ ToolbarDemo.views.loginHandler=function(){
 					//alert('loggined-0');
 					Ext.getCmp('createButton').disable();
 					if ((Ext.getCmp('email').getValue()=='') || (Ext.getCmp('password').getValue()=='')){
-                        Fidestin.Utils.DisplayMessage('Sign-in','Please enter valid email and password in order to sign in.','AAC');
+                        Fidestin.Utils.DisplayMessage('Sign-in','Please enter valid email and password in order to log in.','AAC');
 								Ext.getCmp('createButton').enable();
 								Ext.getCmp('email').fieldEl.dom.focus();
 						}
@@ -214,7 +214,7 @@ var successfullFBAuth=0;
 
 ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 	id:'settingscard',
-    title: "Sign In",    //this causes the button title
+    title: "Log In",    //this causes the button title
     iconCls: "settings",
 	submitOnAction: "true",
     listeners:{
@@ -240,7 +240,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
         Ext.apply(this, {
             dockedItems: [{
                 xtype: "toolbar",
-                title: "Sign In",
+                title: "Log In",
 				items: [
 					{ xtype: 'spacer' },
 	                //,
@@ -341,7 +341,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
                     },
                 {
                 xtype:  'button',
-                text:   'Sign Up',          //manage the backend signup process
+                text:   'Register',          //manage the backend signup process
                 height : 50,
 			    width:	230,
 			    id:		'savebutt',
@@ -355,9 +355,9 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 						Ext.getCmp('firstname').fieldEl.dom.focus();
 						
 						console.log('button clicked');
-	                	if (this.el.dom.textContent=="Sign Up"){
+	                	if (this.el.dom.textContent=="Register"){
 							if ((Ext.getCmp('email').getValue()=='') || (Ext.getCmp('password').getValue()=='')){
-								Fidestin.Utils.DisplayMessage('Sign-In','Please enter valid email and password in order to sign up.','AAC');
+								Fidestin.Utils.DisplayMessage('Sign-In','Please enter valid email and password in order to register.','AAC');
 								
 							}
 							else
@@ -388,7 +388,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 	                		//TODO reset the details on the phone.
 	                	}
 						
-						if (this.el.dom.textContent=="Sign In"){
+						if (this.el.dom.textContent=="Log In"){
 	                		//Process the login request.
 							ToolbarDemo.views.LogInCustomer(Ext.getCmp('email').value,Ext.getCmp('password').getValue());
 	                	}
@@ -402,7 +402,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 				},
 				{
 					xtype	: 'button',
-					text	: 'Sign In',
+					text	: 'Log In',
 					 height : 50,
 			    width:	230,
 					ui		: 'loginButton',
@@ -418,7 +418,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 				},
 				{
 					xtype	: 'component',
-					html	: "No account? Click 'Sign up...'",
+					html	: "No account? Click 'Register...'",
 					id		: 'registermessage'
 				},
 				{
@@ -428,7 +428,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 				},
 				{
 					xtype	: 'button',
-					text	: 'Sign Up',
+					text	: 'Register',
 					 height : 50,
 			    width:	230,
 					ui		: 'createButton',
@@ -628,7 +628,7 @@ ToolbarDemo.views.CreateCust=function(firstname,lastname,email,password){
 								Ext.getCmp('firstname').enable();
 								Ext.getCmp('password').enable();
 								ToolbarDemo.views.HelpCustomerPassword('This email address exists already.');	
-								Ext.getCmp('loginButton').el.dom.textContent='Sign In';
+								Ext.getCmp('loginButton').el.dom.textContent='Log In';
 	                	 	}
 	                	 	else{
 	                	 		//alert(result);
@@ -778,7 +778,7 @@ ToolbarDemo.views.SuccessFullLogin=function(result){
    //Must also re-enable() the Register button....
    Ext.getCmp('createButton').enable();
    //Ask the customer if they want to be sent their password
-   ToolbarDemo.views.HelpCustomerPassword('Sign in failed. ');
+   ToolbarDemo.views.HelpCustomerPassword('Log In failed. ');
    
   }
   if (result["id"] > 0){
