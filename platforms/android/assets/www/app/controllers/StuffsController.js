@@ -327,6 +327,11 @@ Ext.regController('StuffsController', {
 		console.log('StuffsController.js_openListNearby');
 		
 		if (ToolbarDemo.views.stuffView){
+		
+				//Required for refreshing map distance calls
+				mapValuesReturned=0;
+				mapListDisplayed=false;
+				
 				mimap=Ext.getCmp('map1').items.items[0].map;	//grab the map object...
 				bounds = new google.maps.LatLngBounds();
 				

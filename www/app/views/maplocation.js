@@ -14,6 +14,24 @@
 
 var Mymap;
 
+ function doNewWindow(){
+	var ref = window.open('http://apache.org', '_blank', 'location=yes');
+         ref.addEventListener('loadstart', function(event) { console.log('start: ' + event.url); });
+         ref.addEventListener('loadstop', function(event) { console.log('stop: ' + event.url); });
+         ref.addEventListener('loaderror', function(event) { console.log('error: ' + event.message); });
+         ref.addEventListener('exit', function(event) { console.log(event.type); });
+ 
+ }
+ 
+function launchNewDirectionsWindow(){
+	var location= window.location.href;
+            iab = window.open('http://www.rte.ie', '_blank', 'location=yes');
+            iab.addEventListener('exit', function () {
+                window.location.href=location;
+            });
+}
+
+
 function launchDirectionsWindow(){
  
  try{
@@ -108,7 +126,7 @@ ToolbarDemo.views.Mapcard = Ext.extend(Ext.Panel, {
                                             handler:function(){
                                             someobject=this;
                                             console.log('dInside the handler: supplier location is :  ' + this.supplierLocation);
-                                            launchDirectionsWindow();
+                                            doNewWindow();
                                             }
                   });
   

@@ -8,6 +8,12 @@
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
     </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
     <splash density="port-hdpi" src="res/screen.png" />
     <splash density="port-ldpi" src="res/screen.png" />
     <splash density="port-mdpi" src="res/screen.png" />

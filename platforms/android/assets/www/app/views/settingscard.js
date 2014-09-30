@@ -541,7 +541,7 @@ ToolbarDemo.views.setuppage=function(){
 ToolbarDemo.views.IsCustomerActive=function(email,callback){
 	try{
         if(!Fidestin.Utils.checkConnection()){return false}; //check for connection and exit if it fails.
-        debugalert('Checking Activation status : ' + email + ' on ' + Fidestin.WebServices.Location);
+        console.log('Checking Activation status : ' + email + ' on ' + Fidestin.WebServices.Location);
 		var intResult=0;
 		if (localStorage.activated=="1"){					//save us needlessly calling the server
 				//return 1;
@@ -575,7 +575,7 @@ ToolbarDemo.views.IsCustomerActive=function(email,callback){
 			                	 		}
 			                        else {
 			                        	if (result[0]=='True'){
-                                                debugalert('Setting customer Activated');
+                                                console.log('Setting customer Activated');
 			                	 				localStorage.activated="1";
 			                	 				localStorage.firstname=result[1];
 			                	 				intResult=1;
