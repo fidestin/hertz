@@ -1,3 +1,20 @@
+// Create a stopwatch "class." 
+StopWatch = function()
+{
+    this.StartMilliseconds = 0;
+    this.ElapsedMilliseconds = 0;
+}  
+
+StopWatch.prototype.Start = function()
+{
+    this.StartMilliseconds = new Date().getTime();
+}
+
+StopWatch.prototype.Stop = function()
+{
+    this.ElapsedMilliseconds = new Date().getTime() - this.StartMilliseconds;
+}
+
 
 function getUserLocation(){
 	try{
@@ -22,7 +39,7 @@ function getCordovaLocation(){
 		function onSuccess(position) {
 				var userPos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 				localStorage.setItem('userPosition',JSON.stringify(userPos));
-				console.log('getCordovaLocation ' + localStorage.userPosition);
+				console.log('getCordovaLocation ' + localStorage.userPosition + " --- " + displayTime());
 		}
 		
 		function onError(error) {

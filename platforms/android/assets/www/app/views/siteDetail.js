@@ -54,24 +54,7 @@ ToolbarDemo.views.Sitecard = Ext.extend(Ext.Panel, {
 				]
 			});
 			
-		    /*var lightUI = new Ext.Carousel({
-				defaults: {
-					styleHtmlContent: true
-				}, // defaults
-				ui: 'light',
-				width: '100%',
-				height: 100,
-				items: [
-					{
-						html: 'red (ui:light)',
-						style: 'background-color:#f00;'
-					}, {
-						html: 'orange (ui:light)',
-						style: 'background-color:#ffb600;'
-					}
-				] // items
-			)}; // create() 
-			*/
+		    
 			
 			var siteImage = new Ext.Panel({
 				//html: '<img src="http://src.sencha.io/http://www.fidestin.com/images/bridge.jpg"/>',

@@ -19,6 +19,7 @@ function dataHandler(transaction,results){
 	
 loadNearby=function(arraylocationID, callback){
 	try{
+		console.log('html5Load.js - loadNearby');
 		/*should build query using the locationIDs */
 		var DATABASE_QUERY=' select _id as ID,locationName as description, locationCategoryId as categoryID,locationSummary as stuffName, locationAddress as address, locationImage, locationLatitude as latX, locationLongitude as latY from location where location.locationlatitude >  52.371 and location.locationlatitude <54.169 and location.locationlongitude > -10.6	and location.locationlongitude < -7.596';
 		var myDB = openDatabase(shortName, version, displayName, maxSize);
@@ -62,7 +63,7 @@ thirdload=function(categoryID,callback){
 		try
 		{
 			
-			console.log('html5Load.js_thirdLoad()');
+			console.log('html5Load.js_thirdLoad() - querying & loading data based on a certain CategoryID, bars etc ' );
 		   var SQL_STRING=" select _id as ID,locationName as description, locationCategoryId as categoryID,locationSummary as stuffName, locationAddress as address, locationImage, locationLatitude as latX, locationLongitude as latY from location where locationCategoryId=" + categoryID;
 			var myDB = openDatabase(shortName, version, displayName, maxSize);
 			myDB.transaction(function(transaction){
@@ -100,6 +101,7 @@ thirdload=function(categoryID,callback){
 		}
 }		
 loadagain=function(){
+	console.log('html5Load.js  - Opening Database');
 	var myDB = openDatabase(shortName, version, displayName, maxSize);
 	myDB.transaction(queryDB,errorHandler);
 }		
@@ -119,7 +121,7 @@ loadLocationsIntoStore=function(){
 		
 	
 		var myDB = openDatabase(shortName, version, displayName, maxSize);
-		console.log('Opened database');
+		console.log('httml5Load.js_loadLocationsIntoStore - Opened database');
 		var SQL_STRING=" select _id as ID,locationName as description, locationSummary as stuffName, locationAddress as address, locationLatitude as latX, locationLongitude as latY from location";
 		var buildstring='';		//init the HTML builderstring
 		myDB.transaction(
@@ -150,9 +152,34 @@ loadLocationsIntoStore=function(){
 	}
 }
 
+doesDatabaseExist=function(){
+		var myDB = openDatabase(shortName, version, displayName, maxSize);
+		console.log('httml5Load.js_doesDatabaseExist - Check does database exist already.');
+		var SQL_STRING=" select count(*) as countRows from location "; 
+		myDB.transaction(
+						 function(transaction){
+						 transaction.executeSql(SQL_STRING,[],
+												function(transaction,results){
+													if (results.rows.item(0).countRows>0){
+														console.log('Success. Database already populated with  ' + results.rows.item(0).countRows) + ' rows. No need to recreate.';
+														sTotalLoad.Stop();
+														console.log('html5Load.js_startLoad... Time lapsed : sTotalLoad ' + sTotalLoad.ElapsedMilliseconds + '----' + displayTime());
+													}
+													else
+													{
+														console.log('No rows in database or database does not exist');
+													}
+												}
+												, function(){
+													console.log('The table does not exist or some other error occurred...recreating database');
+													startLoad();
+												});
+						 });	
+}
+
 startLoad=function(){
             var demoRunning = false;
-				console.log('Running Data Load from text file to Sqlite');
+				console.log('html5Load.js_startLoad - Running Data Load from text file to Sqlite');
                     demoRunning = true;
                     try {
                         html5sql.openDatabase("location_DB", "Demo Database", 5*1024*1024);
@@ -166,6 +193,8 @@ startLoad=function(){
                                     var endTime = new Date();
                                     console.log("Table with x entries created in: " + ((endTime - startTime) / 1000) + "s");
                                     demoRunning = false;
+									sTotalLoad.Stop();
+									console.log('html5Load.js_startLoad... Time lapsed : sTotalLoad ' + sTotalLoad.ElapsedMilliseconds + '----' + displayTime());
                                 },
                                 function(error, failingQuery){ //Failure
                                     console.log("Error: " + error.message);

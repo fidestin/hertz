@@ -158,6 +158,7 @@ var html5sql = (function () {
 		defaultFailureCallback: doNothing,
 		putSelectResultsInArray: true,
 		openDatabase: function (name, displayname, size, whenOpen) {
+			console.log('html5sql.js - openDatabase ');
 			html5sql.database = openDatabase(name, "", displayname, size);
 			readTransactionAvailable = typeof html5sql.database.readTransaction === 'function';
 			if (whenOpen) {

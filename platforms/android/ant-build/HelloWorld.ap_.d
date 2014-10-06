@@ -1111,6 +1111,7 @@ c:\Brendan\Vouchers\code\hertz\platforms\android\assets\www\jquery.mobile\jquery
 c:\Brendan\Vouchers\code\hertz\platforms\android\assets\www\jquery.mobile\jquery.mobile.simpledialog.js \
 c:\Brendan\Vouchers\code\hertz\platforms\android\assets\www\jquery.mobile\jquery.mobile.simpledialog2.js \
 c:\Brendan\Vouchers\code\hertz\platforms\android\assets\www\js\index.js \
+c:\Brendan\Vouchers\code\hertz\platforms\android\assets\www\js\timer.js \
 c:\Brendan\Vouchers\code\hertz\platforms\android\assets\www\plugins\org.apache.cordova.device \
 c:\Brendan\Vouchers\code\hertz\platforms\android\assets\www\plugins\org.apache.cordova.inappbrowser \
 c:\Brendan\Vouchers\code\hertz\platforms\android\assets\www\plugins\org.apache.cordova.splashscreen \

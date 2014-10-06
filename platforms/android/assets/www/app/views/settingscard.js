@@ -92,7 +92,7 @@ ToolbarDemo.views.loginHandler=function(){
 					//alert('loggined-0');
 					Ext.getCmp('createButton').disable();
 					if ((Ext.getCmp('email').getValue()=='') || (Ext.getCmp('password').getValue()=='')){
-                        Fidestin.Utils.DisplayMessage('Sign-in','Please enter valid email and password in order to log in.','AAC');
+                        Fidestin.Utils.DisplayMessage('Log In','Please enter valid email and password in order to log in.','AAC');
 								Ext.getCmp('createButton').enable();
 								Ext.getCmp('email').fieldEl.dom.focus();
 						}
@@ -101,7 +101,7 @@ ToolbarDemo.views.loginHandler=function(){
 							console.log('Logging them in');
 							var mainc=Ext.getCmp('sett');
 							 var l= mainc.setLoading(true,true);
-							 l.el.down('div.x-loading-msg').setHTML("Signing in...");
+							 l.el.down('div.x-loading-msg').setHTML("Logging in...");
         			
 							ToolbarDemo.views.LogInCustomer(Ext.getCmp('email').getValue(),Ext.getCmp('password').getValue());
 						}
@@ -357,7 +357,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 						console.log('button clicked');
 	                	if (this.el.dom.textContent=="Register"){
 							if ((Ext.getCmp('email').getValue()=='') || (Ext.getCmp('password').getValue()=='')){
-								Fidestin.Utils.DisplayMessage('Sign-In','Please enter valid email and password in order to register.','AAC');
+								Fidestin.Utils.DisplayMessage('Log In','Please enter valid email and password in order to register.','AAC');
 								
 							}
 							else
@@ -378,7 +378,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 									
 									Ext.getCmp('createButton').show();
 									Ext.getCmp('savebutt').hide();
-									Ext.getCmp('loginButton').el.dom.textContent='Sign Out';
+									Ext.getCmp('loginButton').el.dom.textContent='Log Out';
 								
 								//this.disable();		///whats this disabling?
 							}
@@ -485,7 +485,7 @@ ToolbarDemo.views.setuppage=function(){
 			Ext.getCmp('createButton').disable();
 			if 			(Ext.getCmp('loginButton').el!=undefined)
 				{
-					Ext.getCmp('loginButton').el.dom.textContent="Sign Out";
+					Ext.getCmp('loginButton').el.dom.textContent="Log Out";
 				}
 		}
 		
@@ -745,7 +745,7 @@ ToolbarDemo.views.RequestCustomerPassword=function(custEmail){
                     contentType: "application/json; charset=utf-8",
                     url:Fidestin.WebServices.Location+"/Service1.asmx/RequestCustomerPassword",
                     success:function(result) {
-                     Fidestin.Utils.DisplayMessage('Sign-In password','We just emailed your password to you.');
+                     Fidestin.Utils.DisplayMessage('Log In password','We just emailed your password to you.');
 								 
                     },
                     error:function(){
@@ -782,8 +782,8 @@ ToolbarDemo.views.SuccessFullLogin=function(result){
    
   }
   if (result["id"] > 0){
-   Fidestin.Utils.DisplayMessage('Sign-In', 'You have successfully signed in.','AAB');
-   Ext.getCmp('loginButton').el.dom.textContent="Sign Out";
+   Fidestin.Utils.DisplayMessage('Log In', 'You have successfully signed in.','AAB');
+   Ext.getCmp('loginButton').el.dom.textContent="Log Out";
    
    Ext.getCmp('email').disable();
    Ext.getCmp('password').disable();
