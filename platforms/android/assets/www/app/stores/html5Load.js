@@ -44,6 +44,7 @@ loadNearby=function(arraylocationID, callback){
 														//When all the items are loaded into the store we fire the mapping bit
 														
 														if (i+1==results.rows.length){
+															myMask.hide();
 															console.log('_loadNearby_Firing mapping bit-' + i + '-' + results.rows.length);
 															callback(); //ok - dont fire it...
 														}

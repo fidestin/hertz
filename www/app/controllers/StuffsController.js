@@ -13,6 +13,7 @@ var randWind;
 var randMarker;
 var mimarkers=[];
 var googleMapMarkers=[];
+var myMask;		//used for loading...
 google.maps.InfoWindow.prototype.opened=false;
 var centralDublin=new google.maps.LatLng(53.3497,-6.257);
 			
@@ -202,9 +203,10 @@ Ext.regController('StuffsController', {
 
 		  var categoryTitle=options.category.data.catdescription;
 		  var pointsc=Ext.getCmp('listStuffs');
-		  var l=pointsc.setLoading(true,true);
-		  l.el.down('div.x-loading-msg').setHTML("Loading ->" +vrecord.data.catdescription);
-                               
+		  if (localStorage.userPosition!=null){
+			myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Loading " +vrecord.data.catdescription});
+			myMask.show();
+          }
 			console.log('StuffsController.js_editstuffs');
 		if (ToolbarDemo.views.stuffView){
 				
@@ -266,7 +268,6 @@ Ext.regController('StuffsController', {
 		{
 			Ext.getCmp('backButtonSite').handler=backToViewList;
 				Ext.getCmp('showMapButton').setVisible(true);
-			
 		}
 		else
 		{
@@ -332,6 +333,11 @@ Ext.regController('StuffsController', {
 				mapValuesReturned=0;
 				mapListDisplayed=false;
 				
+				if (localStorage.userPosition!=null){
+					myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Searching nearby..."});
+					myMask.show();
+				}
+		  
 				mimap=Ext.getCmp('map1').items.items[0].map;	//grab the map object...
 				bounds = new google.maps.LatLngBounds();
 				
@@ -367,21 +373,7 @@ Ext.regController('StuffsController', {
 				);
 							
 				
-			/*	
-			//**** Google Map Management	
-			google.maps.event.addDomListener(mimap,'center_changed',function(){
-					console.log('Firing resize');
-					google.maps.event.trigger(mimap,"resize");	//ensures it displays correctly after pan
-			});	
-			ToolbarDemo.views.stuffView.setActiveItem(ToolbarDemo.views.mapView,{ type: 'slide', direction: 'left' });
-			google.maps.event.trigger(mimap,"resize");		//ensures it displays correctly on opening	
-			//mimap.setCenter(userLocation);		//bounds not working...
-			mimap.setCenter(bounds.getCenter());
-			mimap.setZoom(9);
-			//**** End Map Management
-			*/
-			
-			
+		
 		}
 	},
 	

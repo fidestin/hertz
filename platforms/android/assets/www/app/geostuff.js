@@ -13,19 +13,20 @@ function getUserLocation(){
 
 }
 
+function timedforceGetCordovaLocation()
+{
+	myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Refreshing location"});
+	myMask.show();
+	console.log('TimedforceGetCordovaLocation ');
+	forceGetCordovaLocation();
+	
+}
+
 function forceGetCordovaLocation()
 {
-	if (!navigator.geolocation==false){
-			console.log('geolocation disabled');
-			alert('Please check your phone settings to ensure GPS is enabled.');
-		}
-		else
-			{
 				try{
-				
 					function onSuccess(position) {
 							try{
-							
 								var userPos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 								localStorage.setItem('userPosition',JSON.stringify(userPos));
 								console.log('forceGetCordovaLocation ' + localStorage.userPosition + " --- " + displayTime());
@@ -34,8 +35,8 @@ function forceGetCordovaLocation()
 								}
 								catch(b)
 								{
-								console.log('Error in forceGetCordovaLocation- onSuccess ' + b);
-								myMask.hide();
+									console.log('Error in forceGetCordovaLocation- onSuccess ' + b);
+									myMask.hide();
 								}
 						}
 				
@@ -45,18 +46,17 @@ function forceGetCordovaLocation()
 							myMask.hide();
 						}
 					
-					if (navigator.geolocation==true)
-					{
-						console.log('Geo enabled');
-						myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Refreshing da location"});
-						myMask.show();
-						navigator.geolocation.getCurrentPosition(onSuccess, onError,{timeout:10000});
-					}
+					
+					console.log('Calling geo.');
+					//myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Refreshing dax location"});
+					//myMask.show();
+					navigator.geolocation.getCurrentPosition(onSuccess, onError,{timeout:10000});
+					
 				}
 				catch(b){
 					console.log('Error in forceGetCordovaLocation '+b);
 				}
-			}
+			
 	}
 
 function getMessage(messageText){
@@ -76,7 +76,7 @@ function getCordovaLocation(){
 			console.log('uesrPosition is Null. Prompt for geolocation access.');
 			if (confirm('Allow app to detect your geolocation?')){
 				console.log('User allowing geoLocation');
-				forceGetCordovaLocation();
+				timedforceGetCordovaLocation();
 			}
 			else
 			{

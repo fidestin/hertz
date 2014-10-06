@@ -1,6 +1,7 @@
 ToolbarDemo = new Ext.Application({
     name: "ToolbarDemo",
     launch: function() {
+		 getCordovaLocation();
     	console.log('app.js_launch. ');
 		
 		if (!ToolbarDemo.views.mainView) {

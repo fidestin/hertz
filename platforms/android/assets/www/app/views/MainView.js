@@ -1,6 +1,6 @@
 //FIX_115 *** START - Moved this function here so it can be called more easily...
 ToolbarDemo.views.LoadVouchersIntoDisplay=function(){
-    debugalert('ToolbarDemo.views.LoadVouchersIntoDisplay__Loading Vouchers into display.');
+    console.log('ToolbarDemo.views.LoadVouchersIntoDisplay__Loading Vouchers into display.');
     var mainc=Ext.getCmp('listVouchers');
     var l=mainc.setLoading(true,true);
     l.el.down('div.x-loading-msg').setHTML("Loading vouchers...");
@@ -38,7 +38,8 @@ ToolbarDemo.views.MainView = Ext.extend(Ext.Panel, {
                 var resActive=ToolbarDemo.views.IsCustomerActive(localStorage.email,function(num){
             					//do nothing with the return value
             					//the IsCustomerActive will set the value.
-            					debugalert(num + '. Setting the Active customer - so they can see Vouchers '+ localStorage.activated+'. Has Connection : ' + localStorage.hasConnection + 'localStorage.loggedIn :' + localStorage.loggedIn);
+            					//debugalert(num + '. Setting the Active customer - so they can see Vouchers '+ localStorage.activated+'. Has Connection : ' + localStorage.hasConnection + 'localStorage.loggedIn :' + localStorage.loggedIn);
+								console.log('Some Active Customer error stuff in MainView.js');
                                 if (num!=0) ToolbarDemo.views.LoadVouchersIntoDisplay();
             					}
             				);

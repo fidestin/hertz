@@ -116,7 +116,7 @@ Fidestin.Utils.getMonthAsInteger=function(monthstring)
 
 
 
-
+/*
 Fidestin.Utils.UserLocation=function(){
     try{
     console.log('Getting user location');
@@ -147,7 +147,7 @@ Fidestin.Utils.UserLocationSuccess=function(position){
        
 
 }
-
+*/
 Fidestin.Utils.getOpenVouchers=function(storeID){
     //console.log('Fidestin.Utils.getOpenVouchers');
     //BMCA JAN 2012 Added StoreID as param

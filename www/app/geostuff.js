@@ -1,21 +1,3 @@
-// Create a stopwatch "class." 
-StopWatch = function()
-{
-    this.StartMilliseconds = 0;
-    this.ElapsedMilliseconds = 0;
-}  
-
-StopWatch.prototype.Start = function()
-{
-    this.StartMilliseconds = new Date().getTime();
-}
-
-StopWatch.prototype.Stop = function()
-{
-    this.ElapsedMilliseconds = new Date().getTime() - this.StartMilliseconds;
-}
-
-
 function getUserLocation(){
 	try{
 		var userPos=JSON.parse(localStorage.getItem('userPosition'));
@@ -31,19 +13,79 @@ function getUserLocation(){
 
 }
 
+function timedforceGetCordovaLocation()
+{
+	myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Refreshing location"});
+	myMask.show();
+	console.log('TimedforceGetCordovaLocation ');
+	forceGetCordovaLocation();
+	
+}
+
+function forceGetCordovaLocation()
+{
+				try{
+					function onSuccess(position) {
+							try{
+								var userPos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+								localStorage.setItem('userPosition',JSON.stringify(userPos));
+								console.log('forceGetCordovaLocation ' + localStorage.userPosition + " --- " + displayTime());
+								Fidestin.Utils.DisplayMessage('Location','Your location has been refreshed.','AAC');
+								myMask.hide();
+								}
+								catch(b)
+								{
+									console.log('Error in forceGetCordovaLocation- onSuccess ' + b);
+									myMask.hide();
+								}
+						}
+				
+					function onError(error) {
+							Fidestin.Utils.DisplayMessage('Location','Your location could not be determined. Please check your phone settings to ensure GPS is enabled.','AAC');
+							console.log('forceGetCordovaLocation - code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+							myMask.hide();
+						}
+					
+					
+					console.log('Calling geo.');
+					//myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Refreshing dax location"});
+					//myMask.show();
+					navigator.geolocation.getCurrentPosition(onSuccess, onError,{timeout:10000});
+					
+				}
+				catch(b){
+					console.log('Error in forceGetCordovaLocation '+b);
+				}
+			
+	}
+
+function getMessage(messageText){
+	ToolbarDemo.views.HelpCustomerPassword(messageText);
+}
 //The new way using Cordova geoLocation services
 function getCordovaLocation(){
 	try
 	{
-		navigator.geolocation.getCurrentPosition(onSuccess, onError);
-		function onSuccess(position) {
-				var userPos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-				localStorage.setItem('userPosition',JSON.stringify(userPos));
-				console.log('getCordovaLocation ' + localStorage.userPosition + " --- " + displayTime());
+		if (!navigator.geolocation){
+			alert('Please change your phone settings to allow geolocation.');
+			return;
 		}
-		
-		function onError(error) {
-			console.log('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+		console.log('In getCordovaLocation ');
+		//do we have a user location?
+		if (localStorage.userPosition==null){
+			console.log('uesrPosition is Null. Prompt for geolocation access.');
+			if (confirm('Allow app to detect your geolocation?')){
+				console.log('User allowing geoLocation');
+				timedforceGetCordovaLocation();
+			}
+			else
+			{
+				alert('The app may not function properly without knowing your geolocation.');
+			}
+		}
+		else
+		{
+			console.log(localStorage.userPosition);
 		}
     }
 	catch(b){
@@ -126,7 +168,8 @@ function updatePlanner(timeHere,distHere,dataIndex){
 			//Could also update spinner to user can see something is happening, the distances are being calculated...
 			ToolbarDemo.views.stuffsListView.items.items[0].refresh();
       var pointsc=Ext.getCmp('listStuffs');
-      pointsc.setLoading(false);
+      //pointsc.setLoading(false);
+	  myMask.hide();
 		}
 	}
 	catch(b){

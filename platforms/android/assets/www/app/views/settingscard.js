@@ -9,6 +9,18 @@ ToolbarDemo.views.HelpCustomerPassword=function(MessageStart){
 	})
 }
 
+ToolbarDemo.views.GetInputConfirm=function(messageText, callback){
+	Ext.Msg.confirm('App Title',messageText,
+	function(e){
+		if (e=='yes')
+		{
+			callback();
+		}
+		
+	})
+}
+
+
 //Required to manage the buttons on the screen to prepare for SingUp
 ToolbarDemo.views.createLoginHandler=function(){
 	console.log('CreateLoginHandler. Just manages the buttons...calls nothing....');				
@@ -214,7 +226,7 @@ var successfullFBAuth=0;
 
 ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 	id:'settingscard',
-    title: "Log In",    //this causes the button title
+    title: "Settings",    //this causes the button title
     iconCls: "settings",
 	submitOnAction: "true",
     listeners:{
@@ -240,7 +252,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
         Ext.apply(this, {
             dockedItems: [{
                 xtype: "toolbar",
-                title: "Log In",
+                title: "Settings",
 				items: [
 					{ xtype: 'spacer' },
 	                //,
@@ -430,11 +442,26 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
 					xtype	: 'button',
 					text	: 'Register',
 					 height : 50,
-			    width:	230,
+					width:	230,
 					ui		: 'createButton',
 					id		: 'createButton',
 					handler	: function(){
 						ToolbarDemo.views.createLoginHandler();  //just managed buttons
+					}
+				},
+				{
+					xtype:'spacer',
+					height:4
+				},
+				{
+					xtype	: 'button',
+					text	: 'Refresh location',
+					 height : 50,
+					width:	230,
+					ui		: 'geoButton',
+					id		: 'geoButton',
+					handler	: function(){
+						timedforceGetCordovaLocation();
 					}
 				},
                 {
@@ -444,7 +471,7 @@ ToolbarDemo.views.Settingscard = Ext.extend(Ext.form.FormPanel, {
                     {
                     xtype:'component',
                     id:'fidesversion',
-                    html:'2014.09.23.1'   //V.V.V.YYYY.MM.DD//--Added FB+geo+Versioning+storelink
+                    html:'2014.10.6.1'   //V.V.V.YYYY.MM.DD//--Added FB+geo+Versioning+storelink
                     },
 				{
 				    xtype:  'button',
