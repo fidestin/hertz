@@ -1,11 +1,8 @@
 //loads the open Vouchers - for a StoreManager
 //Website and App
 var Fidestin={};
-
 Fidestin.Utils={};
-
 Fidestin.WebServices={};
-
 Fidestin.Utils.AboutPage='http://www.fidestin.com/about.html';          //About page.
 
 //Webservices Location
@@ -96,14 +93,6 @@ Fidestin.Utils.checkConnection=function(){
     
 }
 
-
-
-
-
-
-
-
-
 Fidestin.Utils.getMonthAsInteger=function(monthstring)
 {
 	var result=0;
@@ -158,38 +147,6 @@ Fidestin.Utils.UserLocationSuccess=function(position){
        
 
 }
-
-//May 27th Allows dev debug the scanstring
-Fidestin.Utils.getUnSafeString=function(safeString){
-    console.log('Fidestin.Utils.getUnsafeString:' + safeString);
-    var params="{safeQueryString:'"+safeString+"'}";
-    console.log('params: ' + params);
-    $.ajax({
-           type:"POST",
-           data:params,
-           dataType:"json",    
-           contentType: "application/json; charset=utf-8",
-           url:Fidestin.WebServices.Location+"/Service1.asmx/DisplayUnsafeQueryString",
-           success:function(result) {
-           console.log('The scan is : ' + result);
-           return result;
-           },
-           error:function(){
-         
-           $(document).ajaxError(function(e, xhr, settings, exception) { 
-                                 debugalert('error in: ' + settings.url + ' \n'+'error:\n' + xhr.responseText ); 
-                                 }); 
-           var errormessage='Error in getUnsafeString';
-           debugalert(errormessage);
-           return errormessage;
-           }
-           
-           });      
-    
-}
-
-
-
 
 Fidestin.Utils.getOpenVouchers=function(storeID){
     //console.log('Fidestin.Utils.getOpenVouchers');
@@ -364,81 +321,4 @@ Fidestin.Utils.GetQueryStrings=function() {
 
   return assoc; 
 } 
-
-
-
-
-$(document).ready(function(){
-                  //callFB();
-                  //loginClick();
-                  });
-
-function callFB(){
-console.log('calling FB');
- window.fbAsyncInit = function() {
-  FB.init({
-          appId      : '649999875012714', // App ID
-          status     : true, // check login status
-          cookie     : true, // enable cookies to allow the server to access the session
-          oauth      : true, // enable OAuth 2.0
-          xfbml      : true  // parse XFBML
-          });
-  
-  // Additional initialization code here
- };
- 
- // Load the SDK Asynchronously
- (function(d){
-  var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-  js = d.createElement('script'); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js";
-  d.getElementsByTagName('head')[0].appendChild(js);
-  }(document));     
- 
- 
-}
-
-
-window.fbAsyncInit = function() {
- console.log('inside fbAsynchInit - required to call FB.init -> FB.login functions');
- FB.init({
-         appId      : '649999875012714', // Insert your App ID here
-         status     : true, // check login status
-         cookie     : true, // enable cookies to allow the server to access the session
-         oauth      : true, // enable OAuth 2.0
-         xfbml      : true  // parse XFBML
-         });
- console.log('FB Init worked...');
- //Event Subscription ***//
- //Detect login change events
- FB.Event.subscribe('auth.login', function(response) {
-                    console.log('auth.login, could call controller action/function?');
-                    });
- FB.Event.subscribe('auth.logout', function(response) {
-                    console.log('auth.logout, could call controller action/function?');
-                    });
- FB.Event.subscribe('auth.statusChange', function(response) {
-                    console.log('The status of the session is: ' + response.status);
-                    if (response.status=='connected'){
-                    console.log('Redirect to controller action using Disatch+Controller code or else setView?');
-                    }
-                    });
- /*** Initialization code here ***/
- 
- // Get the users login status - then CallBack function to process that Asynch call
- FB.getLoginStatus(function(response) {
-                   console.log('FB.getLoginStatus');
-                   if (response.authResponse) {
-                   // Logged in and connected user, someone you know
-                   console.log("User is logged in - not calling loginToFacebook");
-                   
-                   //loginToFacebook();  // Pass directly to login so we can get the users name and email (at this point we only have the facebook ID)
-                   } else {
-                   // No user session available, someone you dont know
-                   console.log("User is NOT logged in");				
-                   //showLogin();
-                   }
-                   });
-};  // End Facebook async login
-
 
